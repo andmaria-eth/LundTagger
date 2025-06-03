@@ -7,5 +7,7 @@ This repository provides a framework for jet tagging at the FCC using a [LundNet
   - 6: u-quarks, d-quarks, s-quark, c-quark, b-quark, gluons
 - `modelname`: the name of the script where the model is specify. The code looks for this is script in the `LundTagger/architectures/` folder and expects a class `LundNetTagger` where the model would be contained. This is set by default to `arch`. An example of architecture is shown in `./architectures/my_arch.py`.
 - `epochs`: the amount of epochs you want to train or load the model you are working with. It is set by default to 150
+- `pdg`: a bool that specifies whether you want to use the PDG information in your tree
+- `suffix`: a string which will be added at the end of any saved file. This is useful, for instance, when loading different `JetGraphProducer`s. 
 
 This repo provides the tools to train, evaluate and compare several models. You can refer to `basic_example.py` to check a few functionalities and how to use them. Please do not hesitate to contact me for questions or issues. 
