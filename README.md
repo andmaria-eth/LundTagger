@@ -10,4 +10,4 @@ This repository provides a framework for jet tagging at the FCC using a [LundNet
 - `pdg`: a bool that specifies whether you want to use the PDG information in your tree
 - `suffix`: a string which will be added at the end of any saved file. This is useful, for instance, when loading different `JetGraphProducer`s. 
 
-This repo provides the tools to train, evaluate and compare several models. You can refer to `basic_example.py` to check a few functionalities and how to use them. Please do not hesitate to contact me for questions or issues. 
+This repo provides the tools to train, evaluate and compare several models. A few samples with Higgsstrahlung events where a Higgs decays to quaks and the Z to a muon pair are present in the `LundTagger/samples` folder. You can refer to `basic_example.py` to check a few functionalities and how to use them. Please do not hesitate to contact me for questions or issues. 
