@@ -1,0 +1,25 @@
+from LundTagger import LundTagger
+import plotting_utils
+
+tagger6 = LundTagger(6, pdg=True,epochs=5,modelname="my_arch")
+tagger6.load()
+tagger6.plot_confusion(tagger6.validation_loader)
+loss_train,acc_train = tagger6.epochwise_performance(tagger6.training_loader)
+loss_val,acc_val = tagger6.epochwise_performance(tagger6.validation_loader)
+tagger6.plot_rocs()
+tagger6.plot_flavored_rocs()
+tagger6.plot_train_vs_val(loss_train,loss_val,is_loss=True)
+tagger6.plot_train_vs_val(acc_train,acc_val)
+
+tagger6_no_pdg = LundTagger(6,pdg=False,epochs=5,modelname="my_arch")
+tagger6_no_pdg.load()
+tagger6_no_pdg.plot_confusion(tagger6_no_pdg.validation_loader)
+loss_train,acc_train = tagger6_no_pdg.epochwise_performance(tagger6_no_pdg.training_loader)
+loss_val,acc_val = tagger6_no_pdg.epochwise_performance(tagger6_no_pdg.validation_loader)
+tagger6_no_pdg.plot_rocs()
+tagger6_no_pdg.plot_flavored_rocs()
+tagger6_no_pdg.plot_train_vs_val(loss_train,loss_val,is_loss=True)
+tagger6_no_pdg.plot_train_vs_val(acc_train,acc_val)
+plotting_utils.comparing_plotter(tagger6,tagger6_no_pdg,is_loss=True)
+plotting_utils.comparing_plotter(tagger6,tagger6_no_pdg,is_loss=True)
+plotting_utils.compare_ROC_flavor(tagger6,tagger6_no_pdg)
