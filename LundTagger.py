@@ -239,29 +239,18 @@ class LundTagger():
         if not hasattr(self,'training_loader'): self.set_loaders()
         optimizer = torch.optim.AdamW(self.model.parameters(),lr=1e-2,weight_decay=1e-4)
         scheduler = OneCycleLR(optimizer,max_lr=1e-2,div_factor=200,epochs=self.epochs, steps_per_epoch=len(self.training_loader))
-        train_acc = np.zeros(self.epochs,dtype=float)
-        train_loss = np.zeros(self.epochs,dtype=float)
         criterion = torch.nn.CrossEntropyLoss()
         for epoch in range(self.epochs):
             self.model.train()
-            total = 0
             for data1 in self.training_loader:
                 data = data1.to(self.device)
                 optimizer.zero_grad()  
                 acc_value,loss = self.evaluate_batch(data, criterion)
-                train_loss[epoch] += loss.item()
-                train_acc[epoch] += acc_value
-                total += data.y.size(0)
                 loss.backward()
                 optimizer.step()
                 scheduler.step()
-            train_loss[epoch] = train_loss[epoch]/len(self.training_loader)
-            train_acc[epoch] = train_acc[epoch]/total
-    
             model_file = f"./model_instances/{self.modelname}_{self.n}tagger_{'with_pdg' if self.pdg else 'no_pdg'}{self.suffix}_epoch{epoch}.pt"
             torch.save(self.model.state_dict(),model_file)
-        self.training_loss = train_loss
-        self.training_acc = train_acc
         final_model_file = f"./models/{self.modelname}_{self.n}tagger_{'with_pdg' if self.pdg else 'no_pdg'}{self.suffix}.pt"
         torch.save(self.model.state_dict(),final_model_file)
 
